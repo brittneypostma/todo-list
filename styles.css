@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: linear-gradient(to right, #eee, #fff, #eee);
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+span {
+  font-size: 1.8vh;
+}
+
+.container {
+  box-shadow: -5px 19px 38px rgba(0, 0, 0, 0.3),
+    -5px 15px 12px rgba(0, 0, 0, 0.22);
+  background-color: rgba(255, 255, 255);
+  max-width: 700px;
+  min-width: 500px;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-rows: 300px 85px 1fr 50px;
+  justify-items: center;
+}
+
+.header {
+  justify-self: stretch;
+  background: url("https://c4.wallpaperflare.com/wallpaper/607/116/975/sheet-paper-pencil-cup-wallpaper-preview.jpg") no-repeat center center;
+  color: white;
+  display: grid;
+  padding: 0 25px;
+}
+
+.top {
+  align-self: flex-end;
+  text-align: right;
+  font-size: 1.5vh;
+}
+
+h1 {
+  text-shadow: -2px 2px 5px rgba(0, 0, 0, 0.5), 1px -1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.add-item {
+  padding: 25px;
+  width: 100%;
+  height: 85px;
+  background-color: #FEE002;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+input {
+  width: 100%;
+  margin-right: 10px;
+  border: none;
+  border-radius: 0;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+input:focus {
+  border: 2px solid black;
+}
+
+i {
+  cursor: pointer;
+}
+
+main {
+  width: 100%;
+}
+
+ul {
+  display: grid;
+  justify-content: stretch;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+}
+
+li {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 25px 1fr 25px;
+  justify-items: center;
+  align-items: center;
+  grid-gap: 10px;
+  padding: 0 25px;
+}
+
+li>p {
+  justify-self: flex-start;
+}
+
+
+footer {
+  padding: 10px 25px;
+  justify-self: stretch;
+  align-self: flex-end;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.8vh;
+  transition: all 0.2s linear;
+}
+
+button:hover {
+  color: red;
+}
+
+.lineThrough {
+  text-decoration: line-through;
+}
