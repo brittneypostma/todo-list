@@ -90,6 +90,6 @@ function loadEvents() {
   document.querySelector('#item').addEventListener('keyup', function (e) {
     if (e.target.value !== '' && e.keyCode === 13) {
       addTodo()
-    } else document.querySelector('input').focus()
+    } else document.querySelector('#item').focus()
   })
 }
