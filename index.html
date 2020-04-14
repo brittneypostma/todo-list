@@ -9,17 +9,19 @@
 
 </head>
 
-<body onload="newItem()">
+<!-- onload="addTask()" -->
+
+<body>
   <div class="container center">
     <div class="header">
-      <h1>My TODO App</h1>
+      <h1>Brittney's Todo List</h1>
       <div class="top">
         <h1 id="date"></h1>
       </div>
     </div>
     <div class="add-item">
       <input autofocus type="text" id="item" placeholder="Add a todo here" />
-      <i onclick="addTodo()" class="fa fa-plus-circle fa-lg" id="add" aria-hidden="true"></i>
+      <i class="fa fa-plus-circle fa-lg" id="add" aria-hidden="true"></i>
     </div>
     <main>
       <ul id="todo-list" class="todo-list"></ul>

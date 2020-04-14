@@ -100,8 +100,10 @@ li {
   padding: 0 25px;
 }
 
-li>p {
+li>label {
   justify-self: flex-start;
+  width: 100%;
+  cursor: pointer;
 }
 
 
@@ -128,4 +130,6 @@ button:hover {
 
 .lineThrough {
   text-decoration: line-through;
+  color: #777;
+  font-style: italic;
 }
