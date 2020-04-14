@@ -1,11 +1,9 @@
 getDay()
-// loadEvents();
+loadEvents();
 
-// function loadEvents() {
-//   document.querySelector('#add').addEventListener('click', submit);
-//   document.querySelector('ul').addEventListener('click', deleteOrTick);
-
-// }
+const name = document.getElementById('name')
+name.value = localStorage.setItem("name", JSON.stringify(name.value)) || 'Your'
+name.style.width = '5ch'
 
 function getDay() {
   const date = document.querySelector("#date")
@@ -17,128 +15,80 @@ function getDay() {
 
 let stored = JSON.parse(window.localStorage.getItem("todos"));
 let todos = stored ? stored : []
+const list = document.querySelector("#todo-list")
 
-var list = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < list.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  list[i].appendChild(span);
+function showTodos() {
+  list.innerHTML = ''
+  todos.forEach(todo => {
+    const done = todo.done ? 'checked' : ''
+    list.insertAdjacentHTML('beforeend', `
+      <li class="todo-item ${done}" id="${todo.id}">
+        ${todo.name}
+        <i onclick="deleteTask('${todo.id}')" class="de fa fa-trash-o" job="delete"></i>
+      </li>`)
+  })
+  document.querySelector("#item-count").innerHTML = todos.length
 }
 
-// Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function () {
-    var div = this.parentElement;
-    div.style.display = "none";
+function addTodo() {
+  const newTodo = {
+    name: item.value,
+    id: Math.random()
+      .toString(36)
+      .substr(2, 9),
+    done: false
   }
+  let updTodos = [...todos, newTodo]
+  localStorage.setItem("todos", JSON.stringify(updTodos))
+  todos = updTodos
+  showTodos()
+  item.value = ''
 }
 
-// Add a "checked" symbol when clicking on a list item
-var list = document.querySelector('ul');
-list.addEventListener('click', function (ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
-}, false);
+function deleteTask(id) {
+  const idx = todos.findIndex(todo => todo.id === id)
+  todos.splice(idx, 1)
+  localStorage.setItem("todos", JSON.stringify(todos))
+  showTodos()
+}
 
-// Create a new list item when clicking on the "Add" button
-function newElement() {
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("myUL").appendChild(li);
-  }
-  document.getElementById("myInput").value = "";
 
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function () {
-      var div = this.parentElement;
-      div.style.display = "none";
+const complete = () => {
+  confirm("Are you sure you want to delete your todos?")
+  todos.forEach(todo => {
+    if (todo.done) {
+      todos = todos.filter(t => t.done === false)
+      localStorage.setItem("todos", JSON.stringify(todos))
+      showTodos()
+      return todos
     }
-  }
+  })
 }
 
-
-// const add = document.querySelector("#add")
-// const clear = document.querySelector("#clear")
-// const list = document.querySelector("#todo-list")
-
-// const item = document.querySelector("#item")
-// const itemCount = document.querySelector("#item-count")
-// itemCount.innerHTML = todos.length
-
-// const toggleComplete = (id) => {
-//   const idx = todos.findIndex(todo => todo.id === id);
-//   todos[idx].done = !todos.done
-// }
-
-// const showTodos = () => {
-//   todos.forEach(todo => {
-//     list.insertAdjacentHTML('beforeend', `
-//     <li class="todo-item" data-key="${todo.id}">
-//       <p class="text">${todo.name}</p>
-//       <i id="${todo.id}" class="de fa fa-trash-o" job="delete"></i>
-//     </li>`)
-//   })
-// }
-
-// const addTodo = () => {
-//   const newTodo = {
-//     name: item.value,
-//     id: Math.random()
-//       .toString(36)
-//       .substr(2, 9),
-//     done: false
-//   }
-//   let updTodos = [...todos, newTodo]
-//   localStorage.setItem("todos", JSON.stringify(updTodos))
-//   todos = updTodos
-//   showTodos()
-//   item.value = ''
-// }
-
-// const complete = () => {
-//   confirm("Are you sure you want to delete your todos?")
-//   todos = todos.filter(todo => !todo.done);
-// }
-
-// document.addEventListener("keyup", e => {
-//   if (e.keyCode === 13) {
-//     if (item.value) {
-//       addTodo()
-//     } else item.focus
-//   }
-// })
-
-// list.addEventListener('click', function (e) {
-//   if (e.target.tagName === "P") {
-//     e.target.classList.toggle('lineThrough')
-//   }
-// })
-
-// list.addEventListener('click', function (e) {
-//   if (e.target.tagName === "I") {
-//     const id = e.target.id
-//     const idx = todos.findIndex(todo => todo.id === id);
-//     let updTodos = [...todos]
-//     updTodos.splice(idx, 1);
-//     localStorage.setItem("todos", JSON.stringify(updTodos));
-//     todos = updTodos
-//     return todos
-//   }
-// })
+function loadEvents() {
+  document.querySelector('#name').addEventListener('keyup', function handleName(e) {
+    name.style.width = name.value.length - 1 + "ch";
+    if (name.value === '') {
+      name.value = 'Your'
+    }
+    if (e.keyCode === 13) {
+      name.blur()
+    }
+  })
+  document.querySelector('#add').addEventListener('click', addTodo);
+  document.querySelector('ul').addEventListener('click', function (ev) {
+    if (ev.target.tagName === 'LI') {
+      ev.target.classList.toggle('checked');
+      let updTodos = [...todos]
+      const idx = updTodos.findIndex(todo => todo.id === ev.target.id)
+      updTodos[idx].done = !updTodos[idx].done
+      localStorage.setItem("todos", JSON.stringify(updTodos))
+      todos = updTodos
+    }
+  }, false);
+  document.querySelector('#item').addEventListener('keyup', function (e) {
+    if (e.target.value !== '' && e.keyCode === 13) {
+      addTodo()
+    } else document.querySelector('input').focus()
+  })
+}

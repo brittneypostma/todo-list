@@ -45,7 +45,24 @@ span {
   font-size: 1.5vh;
 }
 
+.h1wrap {
+  display: flex;
+  align-items: flex-start;
+}
+
+#name {
+  margin: 0;
+  padding: 0;
+  padding-left: 5px;
+  background: none;
+  color: white;
+  font-size: 3.3vh;
+  font-weight: 600;
+  text-shadow: -2px 2px 5px rgba(0, 0, 0, 0.5), 1px -1px 5px rgba(0, 0, 0, 0.5);
+}
+
 h1 {
+  margin: 0;
   text-shadow: -2px 2px 5px rgba(0, 0, 0, 0.5), 1px -1px 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -88,16 +105,26 @@ ul {
   padding: 0;
   list-style-type: none;
   width: 100%;
+  position: relative;
+}
+
+
+.checked {
+  text-decoration: line-through;
+  font-style: italic;
+  color: #777;
 }
 
 li {
+  position: relative;
   width: 100%;
-  display: grid;
-  grid-template-columns: 25px 1fr 25px;
-  justify-items: center;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  grid-gap: 10px;
   padding: 0 25px;
+  margin: 10px 0;
+  font-size: 2vh;
+  cursor: pointer;
 }
 
 li>label {
