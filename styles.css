@@ -51,8 +51,6 @@ span {
 }
 
 #name {
-  position: relative;
-  top: 1px;
   margin: 0;
   padding: 2px;
   background: none;
