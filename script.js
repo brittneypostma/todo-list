@@ -2,8 +2,8 @@ getDay()
 loadEvents();
 
 const name = document.getElementById('name')
-name.value = localStorage.setItem("name", JSON.stringify(name.value)) || 'Your'
-name.style.width = '5ch'
+name.value = localStorage.setItem("name", JSON.stringify(name.value)) || 'Your name here!'
+name.style.width = '15ch'
 
 function getDay() {
   const date = document.querySelector("#date")
@@ -67,9 +67,9 @@ const complete = () => {
 
 function loadEvents() {
   document.querySelector('#name').addEventListener('keyup', function handleName(e) {
-    name.style.width = name.value.length - 1 + "ch";
+    name.style.width = name.value.length + "ch";
     if (name.value === '') {
-      name.value = 'Your'
+      name.value = ' Your'
     }
     if (e.keyCode === 13) {
       name.blur()
