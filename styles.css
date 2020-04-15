@@ -43,11 +43,14 @@ span {
   align-self: flex-end;
   text-align: right;
   font-size: 1.5vh;
+  margin-bottom: 12px;
 }
 
 .h1wrap {
-  display: flex;
+  display: grid;
   align-items: flex-start;
+  align-content: start;
+  margin-top: 12px;
 }
 
 #name {

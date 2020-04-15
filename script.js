@@ -3,7 +3,7 @@ loadEvents();
 
 const name = document.getElementById('name')
 name.value = JSON.parse(localStorage.getItem("name")) || 'Your name here!'
-name.style.width = '15ch'
+// name.style.width = '15ch'
 
 function getDay() {
   const date = document.querySelector("#date")
@@ -68,7 +68,7 @@ const complete = () => {
 function loadEvents() {
   document.querySelector('#name').addEventListener('keyup', function handleName(e) {
     localStorage.setItem("name", JSON.stringify(name.value))
-    name.style.width = name.value.length + "ch";
+    // name.style.width = name.value.length + "ch";
     if (name.value === '') {
       name.value = ' Your'
     }
